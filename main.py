@@ -71,8 +71,7 @@ sub_cols[0].write('Aigenvalues')
 eigen_vec = cogn_map.getEigenvalues()
 sub_cols[0].text_area(
     '',
-    value='\n'.join(
-        [' , '.join([str(i+1) for i in  elem] + [str(elem[0]+1)]) for elem in eigen_vec]
+    value='\n'.join(eigen_vec)
     ), height=200
 )
 
