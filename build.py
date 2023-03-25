@@ -179,7 +179,7 @@ class MapBuild:
         return fig
 
 
-    def make_impulse_fig(values, names):
+    def make_impulse_fig(self, values, names):
         res_df = pd.DataFrame(values, columns=names)
         impulse_plot_fig = px.line(
             res_df, markers=True
