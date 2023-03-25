@@ -6,10 +6,10 @@ from addEdge import addEdge, get_color
 
 class MapBuild:
     def __init__(self):
-        self.nodeColor = 'aquamarine'
+        self.nodeColor = 'green'
         self.nodeSize = 30
         self.lineWidth = 3
-        self.lineColor = 'crimson'
+        self.lineColor = 'black'
 
 
     def make_graph_fig(self, adj_matrix, feature_names):
@@ -64,7 +64,7 @@ class MapBuild:
                     x=edge_x[9*i:9*(i+1)], y=edge_y[9*i:9*(i+1)],
                     line=dict(
                         width=self.lineWidth, 
-                        color=get_color('sunset', 0.5*weight_values[i]+0.5),
+                        color=get_color('red', 0.5*weight_values[i]+0.5),
                         dash=dash_styles[i]
                     ),
                     hoverinfo='none', mode='lines'
@@ -114,71 +114,6 @@ class MapBuild:
 
         return fig
 
-
-    def make_eigval_plot(self, eigvals):
-        reals = np.real(eigvals)
-        imags = np.imag(eigvals)
-
-        phi = np.linspace(0, 2*np.pi, 100)
-
-        unit_circle = go.Scatter(
-            x=np.cos(phi), y=np.sin(phi),
-            line=dict(
-                width=1, 
-                color='black',
-                dash='dash'
-            ),
-            hoverinfo='none', mode='lines'
-        )
-
-        large_mask = np.abs(eigvals) > 1
-        eigs_small = go.Scatter(
-            x=reals[~large_mask], y=imags[~large_mask],
-            marker=dict(color='aqua'),
-            mode='markers',
-            hoverinfo='text',
-            hovertext=[str(eigv.round(3)) for eigv in eigvals[~large_mask]]
-        )
-
-        eigs_large = go.Scatter(
-            x=reals[large_mask], y=imags[large_mask],
-            marker=dict(color='aqua', symbol='x'),
-            mode='markers',
-            hoverinfo='text',
-            hovertext=[str(eigv.round(3)) for eigv in eigvals[large_mask]]
-        )
-
-        fig = go.Figure(
-            data=[unit_circle, eigs_small, eigs_large],
-            layout=go.Layout(
-                xaxis=dict(
-                    showgrid=True, 
-                    zeroline=False, 
-                    gridcolor='aqua', 
-                    showline=True, 
-                    showticklabels=True
-                ),
-                yaxis=dict(
-                    showgrid=True, 
-                    zeroline=False, 
-                    gridcolor='aqua', 
-                    showline=True, 
-                    showticklabels=True, 
-                    scaleanchor='x', 
-                    scaleratio=1
-                ),
-                showlegend=False,
-                hovermode='closest',
-                width=350, height=300,
-                margin=dict(b=0,l=50,r=0,t=0),
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-            )
-        )
-
-        return fig
-
-
     def make_impulse_fig(self, values, names):
         res_df = pd.DataFrame(values, columns=names)
         impulse_plot_fig = px.line(
@@ -189,14 +124,14 @@ class MapBuild:
             xaxis=dict(
                 showgrid=True, 
                 zeroline=False, 
-                gridcolor='#65cbf8', 
+                gridcolor='blue', 
                 showline=True, 
                 showticklabels=True
             ),
             yaxis=dict(
                 showgrid=True, 
                 zeroline=False, 
-                gridcolor='#65cbf8', 
+                gridcolor='blue', 
                 showline=True, 
                 showticklabels=True
             ),

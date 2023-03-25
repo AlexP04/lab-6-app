@@ -76,7 +76,7 @@ even_cycles = cogn_map.getCycles(only_even = True)
 even_cycles.sort(key=len, reverse=True)
 even_number = len(even_cycles)
 
-sub_cols[1].write(f'No of even cycles: **{even_number}**.')
+sub_cols[1].write(f'Number of even cycles: **{even_number}**.')
 sub_cols[1].write(f'Numerical stability ($R < 1$): **' + ('$+$' if cogn_map.isStable2() else ' -') + '**.')
 sub_cols[1].write(f'Disruption stability ($R \leq 1$): **' + ('$+$' if cogn_map.isStable() else ' - ') + '**.')
 
@@ -84,7 +84,7 @@ sub_cols[2].write('List of even cycles:')
 sub_cols[2].text_area(
     '',
     value='\n'.join(
-        [' -> '.join([str(i+1) for i in cycle] + [str(cycle[0]+1)]) for cycle in even_cycles]
+        [' > '.join([str(i+1) for i in cycle] + [str(cycle[0]+1)]) for cycle in even_cycles]
     ), height=200
 )
 
