@@ -68,7 +68,13 @@ st.header('Investigation results:')
 
 sub_cols = st.columns(3)
 sub_cols[0].write('Aigenvalues')
-sub_cols[0].plotly_chart(build_map.make_eigval_plot(cogn_map.getEigenvalues()))
+eigen_vec = cogn_map.getEigenvalues()
+sub_cols[0].text_area(
+    '',
+    value='\n'.join(
+        [' , '.join([str(i+1) for i in  elem] + [str(elem[0]+1)]) for elem in eigen_vec]
+    ), height=200
+)
 
 R = cogn_map.getRadius()
 
@@ -79,8 +85,8 @@ even_cycles.sort(key=len, reverse=True)
 even_number = len(even_cycles)
 
 sub_cols[1].write(f'No of even cycles: **{even_number}**.')
-sub_cols[1].write(f'Numerical stability ($R < 1$): **' + ('$\times$' if cogn_map.isStable2() else ' -') + '**.')
-sub_cols[1].write(f'Disruption stability ($R \leq 1$): **' + ('$\times$' if cogn_map.isStable() else ' - ') + '**.')
+sub_cols[1].write(f'Numerical stability ($R < 1$): **' + ('$+$' if cogn_map.isStable2() else ' -') + '**.')
+sub_cols[1].write(f'Disruption stability ($R \leq 1$): **' + ('$+$' if cogn_map.isStable() else ' - ') + '**.')
 
 sub_cols[2].write('List of even cycles:')
 sub_cols[2].text_area(
@@ -108,6 +114,6 @@ iter_count = impulse_cols[1].number_input(
 )
 
 if impulse_cols[1].button('Run', key='run_impulse'):
-    res = cogn_map.impulse_model(init_q=q, steps=iter_count)
+    res = cogn_map.impulse(impulse=q, steps=iter_count)
     impulse_plot_fig = build_map.make_impulse_fig(res, cogn_map.node_names)
     impulse_cols[1].plotly_chart(impulse_plot_fig)
