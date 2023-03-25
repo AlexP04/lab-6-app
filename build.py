@@ -64,7 +64,7 @@ class MapBuild:
                     x=edge_x[9*i:9*(i+1)], y=edge_y[9*i:9*(i+1)],
                     line=dict(
                         width=self.lineWidth, 
-                        color=get_color('red', 0.5*weight_values[i]+0.5),
+                        color=get_color('tempo', 0.5*weight_values[i]+0.5),
                         dash=dash_styles[i]
                     ),
                     hoverinfo='none', mode='lines'
