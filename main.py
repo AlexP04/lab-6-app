@@ -67,13 +67,6 @@ st.header('Investigation results:')
 
 
 sub_cols = st.columns(3)
-sub_cols[0].write('Aigenvalues')
-eigen_vec = cogn_map.getEigenvalues()
-sub_cols[0].text_area(
-    '',
-    value='\n'.join(eigen_vec)
-    ), height=200
-)
 
 R = cogn_map.getRadius()
 
