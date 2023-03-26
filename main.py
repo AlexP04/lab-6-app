@@ -16,18 +16,6 @@ st.set_page_config(
 
 st.title('Cognitive Modeling')
 
-# параметри за замовчуванням для побудови графіків - візуалізації
-builder = GridOptionsBuilder.from_dataframe(input_df)
-builder.configure_default_column(
-    resizable=False, filterable=False, editable=True,
-    sorteable=False, groupable=False
-)
-builder.configure_column('index', header_name='factor', editable=False)
-builder.configure_grid_options(
-    autoSizePadding=1
-)
-options = builder.build()
-
 # визначення 2 колонок- для введення та виведення
 col1, col2 = st.columns(spec=[2, 2])
 
@@ -40,6 +28,18 @@ except:
     
 names = list(input_df['name'])
 input_df = input_df.reset_index().drop(columns=['name'])
+
+# параметри за замовчуванням для побудови графіків - візуалізації
+builder = GridOptionsBuilder.from_dataframe(input_df)
+builder.configure_default_column(
+    resizable=False, filterable=False, editable=True,
+    sorteable=False, groupable=False
+)
+builder.configure_column('index', header_name='factor', editable=False)
+builder.configure_grid_options(
+    autoSizePadding=1
+)
+options = builder.build()
 
 # для першої колонки
 with col1:
