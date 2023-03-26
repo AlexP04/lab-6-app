@@ -16,11 +16,6 @@ st.set_page_config(
 
 st.title('Cognitive Modeling')
 
-# прочитання даних 
-input_df = pd.read_csv('input.csv', delimiter=',', decimal='.', index_col=0)
-names = list(input_df['name'])
-input_df = input_df.reset_index().drop(columns=['name'])
-
 # параметри за замовчуванням для побудови графіків - візуалізації
 builder = GridOptionsBuilder.from_dataframe(input_df)
 builder.configure_default_column(
@@ -36,9 +31,20 @@ options = builder.build()
 # визначення 2 колонок- для введення та виведення
 col1, col2 = st.columns(spec=[2, 2])
 
+# прочитання даних 
+try:
+    adj_file = col1.file_uploader('Input adjustment matrix (with names): ', type=['csv'], key='input_file')
+    input_df = pd.read_csv(adj_file, delimiter=',', decimal='.', index_col=0)
+except:
+    input_df = pd.read_csv('input.csv', delimiter=',', decimal='.', index_col=0)
+    
+names = list(input_df['name'])
+input_df = input_df.reset_index().drop(columns=['name'])
+
 # для першої колонки
 with col1:
-    reload = False
+    reload = False     
+    
     if col1.button('Reset matrix', key='reset_edit'):
         reload = True
 
