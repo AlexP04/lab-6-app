@@ -72,9 +72,12 @@ class Map:
         # Матриця зв'зків графу
         A = self.getMatrix()
         
-        for _ in range(steps):
+        x_n = x[-1] + A @ (x[-1] - x[-2]) + q
+        x.append(x_n)
+        
+        for _ in range(1, steps):
             # Використовується формула для збурення на кожному кроці
-            x_n = x[-1] + A @ (x[-1] - x[-2]) + q
+            x_n = x[-1] + A @ (x[-1] - x[-2])
             x.append(x_n)
 
         # Результат - ланцюг x для кожного кроку
