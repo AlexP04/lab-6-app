@@ -5,7 +5,7 @@ import scipy
 class Map:
     # Конструктор - на вхід задається матриця для графу та імена вузлів 
     def __init__(self, adj_matrix, node_names):
-        adj_matrix = np.array(adj_matrix)
+        adj_matrix = np.array(adj_matrix).T
         node_names = np.array(node_names)
         
         # Ініціалізуємо матрицю зв'язків та зберішаємо як граф (двонапрямлений)
